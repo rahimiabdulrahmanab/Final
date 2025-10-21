@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import Papa from "papaparse";
 import {
   MapContainer,
@@ -15,8 +16,9 @@ import SearchFilters from "./SearchFilters"; // ✅ connected correctly
 
 // Custom icon for clinics
 const clinicIcon = new L.Icon({
-  iconUrl: "https://cdn-icons-png.flaticon.com/512/1828/1828817.png",
-  iconSize: [20, 20],
+  iconUrl:
+    "https://raw.githubusercontent.com/rahimiabdulrahmanab/Clinics-Dashboard/main/Marker.png",
+  iconSize: [40, 40],
   iconAnchor: [10, 20],
   popupAnchor: [0, -20],
   shadowUrl:
@@ -33,8 +35,9 @@ export default function MidSection() {
   const [allClinics, setAllClinics] = useState([]); // full dataset
   const [clinics, setClinics] = useState([]); // filtered dataset
   const [selectedClinic, setSelectedClinic] = useState(null);
-
   const itemRefs = useRef({});
+
+  const navigate = useNavigate(); // 🧭 Add this line here!
 
   // Load CSV data
   useEffect(() => {
@@ -99,17 +102,17 @@ export default function MidSection() {
                   className={`list-group-item ${
                     selectedClinic === id ? "bg-info text-white" : ""
                   }`}
-                  onClick={() => setSelectedClinic(id)}
+                  onClick={() => navigate(`/clinic/${id}`)}
                   style={{ cursor: "pointer" }}
                 >
                   <div className="d-flex align-items-start">
                     <img
-                      src="https://raw.githubusercontent.com/rahimiabdulrahmanab/Clinics-Dashboard/main/clinic-logo.png"
+                      src="https://raw.githubusercontent.com/rahimiabdulrahmanab/Clinics-Dashboard/main/hospital.png"
                       alt="Clinic"
                       className="me-3 rounded"
                       style={{
-                        width: "120px",
-                        height: "120px",
+                        width: "70px",
+                        height: "80px",
                         objectFit: "cover",
                       }}
                     />
